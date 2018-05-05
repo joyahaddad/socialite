@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
 import FacebookLogin from 'react-facebook-login';
 import axios from 'axios';
 import './App.css';
@@ -56,6 +58,12 @@ class App extends Component {
 
     return (
       <div>
+        <MuiThemeProvider>
+          <AppBar
+          title="Title"
+          iconClassNameRight="muidocs-icon-navigation-expand-more"
+           />
+
            <FacebookLogin
             appId = "1645847055464084"
             cookie = {true}
@@ -72,6 +80,7 @@ class App extends Component {
                TEST
              </button>
      <ul>{this.looptest}</ul>
+     </MuiThemeProvider>
       </div>
     );
   }
