@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import FacebookLogin from 'react-facebook-login';
+import Image from 'material-ui-image';
 import axios from 'axios';
 import './App.css';
 import graph from 'fb-react-sdk';
@@ -59,12 +60,24 @@ class App extends Component {
     return (
       <div>
         <MuiThemeProvider>
-          <AppBar
-          title="Title"
+       <AppBar
+          title="S o c i a l i t e"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
-           />
+          style={{
+            backgroundColor: 'rgba(0,0,0,.9)',
+            fontFamily:'montserrat',
+          }}
 
-           <FacebookLogin
+           />
+          
+
+        <Image src="https://images.unsplash.com/photo-1522897048979-e407743f3603?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bc4fc93c0182e8346741c14f49cca546&auto=format&fit=crop&w=1651&q=80" 
+         style ={{
+          padding: 400,
+         }}
+         />
+         
+        <FacebookLogin
             appId = "1645847055464084"
             cookie = {true}
             autoLoad={true}
@@ -73,12 +86,14 @@ class App extends Component {
             callback={this.responseFacebook}
              />
 
-            <button
+
+           <button
                className="btn-margin"
                onClick={this.test}
              >
                TEST
              </button>
+            
      <ul>{this.looptest}</ul>
      </MuiThemeProvider>
       </div>
