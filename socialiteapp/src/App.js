@@ -5,20 +5,35 @@ import AppBar from 'material-ui/AppBar';
 import FacebookLogin from 'react-facebook-login';
 import Image from 'material-ui-image';
 import axios from 'axios';
+import img from './bg.jpeg';
 import './App.css';
 import graph from 'fb-react-sdk';
 
+var divStyle = {
+  backgroundImage: `url('{img}')`
+}
+
+
 class App extends Component {
+
   constructor(props) {
     super(props);
-    this.responseFacebook = this.responseFacebook.bind(this);
-    this.test = this.test.bind(this);
-    this.looptest = this.looptest.bind(this);
-    this.State = {
-      token: 'E',
-      response: []
-    }
-  }
+    this.state = {
+     token: 'E',
+     response: [],
+     facebookel: ''
+   };
+   this.responseFacebook = this.responseFacebook.bind(this);
+   this.test = this.test.bind(this);
+   this.looptest = this.looptest.bind(this);
+  
+      }
+
+
+ goTo(route) {
+   this.props.history.replace(`/${route}`)
+ }
+  
 
  login() {
    this.props.auth.login();
@@ -32,7 +47,7 @@ class App extends Component {
   axios.get('https://graph.facebook.com/v3.0/me?fields=posts&access_token='+ this.state.token +'')
 
   .then( (response) => {
-    this.setState({response: response.data.posts.data});
+    this.setstate({response: response.data.posts.data});
     console.log(this.state.response);
   })
   .catch( (error) => {
@@ -40,26 +55,34 @@ class App extends Component {
   });  
 }
 
-  responseFacebook(response) {
-    console.log(response);
-    this.setState({token: response.accessToken});
-  }
+responseFacebook(response) {
+  console.log(response);
+ this.setState({token: response.accessToken ,
+                facebookel: 'none'});
+}
+
 
   looptest() {
     return ( 
       this.state.response.map((todos,index) => {
          return(<li>5</li>)
        })
-       ) 
-
+       )    
    }
 
-
+  
   render() {
 
+      const stylefbdiv = {
+        display: this.state.facebookel
+      }
+
     return (
-      <div>
+
+
         <MuiThemeProvider>
+                <div style= {divStyle}>
+
        <AppBar
           title="S o c i a l i t e"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
@@ -67,24 +90,18 @@ class App extends Component {
             backgroundColor: 'rgba(0,0,0,.9)',
             fontFamily:'montserrat',
           }}
-
            />
-          
-
-        <Image src="https://images.unsplash.com/photo-1522897048979-e407743f3603?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bc4fc93c0182e8346741c14f49cca546&auto=format&fit=crop&w=1651&q=80" 
-         style ={{
-          padding: 400,
-         }}
-         />
          
+        <div style={stylefbdiv}>
         <FacebookLogin
             appId = "1645847055464084"
             cookie = {true}
-            autoLoad={true}
+            autoLoad={false}
             fields="name,email,picture"
             scope="user_posts"
             callback={this.responseFacebook}
              />
+            </div>
 
 
            <button
@@ -93,10 +110,14 @@ class App extends Component {
              >
                TEST
              </button>
+
+              
             
      <ul>{this.looptest}</ul>
+     </div>
      </MuiThemeProvider>
-      </div>
+
+  
     );
   }
 }
