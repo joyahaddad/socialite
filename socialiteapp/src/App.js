@@ -5,12 +5,13 @@ import AppBar from 'material-ui/AppBar';
 import FacebookLogin from 'react-facebook-login';
 import Image from 'material-ui-image';
 import axios from 'axios';
-import img from './bg.jpeg';
+import img from './socialite.png';
 import './App.css';
 import graph from 'fb-react-sdk';
 
 var divStyle = {
-  backgroundImage: `url('{img}')`
+  height: 1356,
+  backgroundImage: `url(${"socialite.png"})`
 }
 
 
@@ -44,10 +45,10 @@ class App extends Component {
  }
 
  test(){
-  axios.get('https://graph.facebook.com/v3.0/me?fields=posts&access_token='+ this.state.token +'')
+  axios.get('https://graph.facebook.com/v3.0/me?fields=posts{object_id}&access_token='+ this.state.token +'')
 
   .then( (response) => {
-    this.setstate({response: response.data.posts.data});
+    this.setState({response: response.data.posts.data});
     console.log(this.state.response);
   })
   .catch( (error) => {
@@ -63,15 +64,29 @@ responseFacebook(response) {
 
 
   looptest() {
+
+    graph.setAccessToken(this.state.token);
+    graph.setVersion("3.0");
+    console.log(this.state.token);
+
     return ( 
-      this.state.response.map((todos,index) => {
-         return(<li>5</li>)
+     this.state.response.map((data,index) => {
+     // return(<li><h1>{data.message}</h1></li>);
+      graph.get(data.id+'/likes', function(err, res) {
+       console.log(res);
+
+      }
+    );
+
        })
-       )    
+       )
+
+
    }
 
   
   render() {
+
 
       const stylefbdiv = {
         display: this.state.facebookel
@@ -98,7 +113,7 @@ responseFacebook(response) {
             cookie = {true}
             autoLoad={false}
             fields="name,email,picture"
-            scope="user_posts"
+            scope="user_posts,user_likes"
             callback={this.responseFacebook}
              />
             </div>
@@ -113,7 +128,7 @@ responseFacebook(response) {
 
               
             
-     <ul>{this.looptest}</ul>
+     <ul>{this.looptest()}</ul>
      </div>
      </MuiThemeProvider>
 
