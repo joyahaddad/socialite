@@ -8,6 +8,8 @@ import axios from 'axios';
 import img from './socialite.png';
 import './App.css';
 import graph from 'fb-react-sdk';
+import {Doughnut} from 'react-chartjs-2';
+import {Pie} from 'react-chartjs-2';
 
 var divStyle = {
   height: 1356,
@@ -22,7 +24,31 @@ class App extends Component {
     this.state = {
      token: 'E',
      response: [],
-     facebookel: ''
+     facebookel: '',
+     chartdata: [],
+     yearone: 0,
+     yeartwo: 0,
+     yearthree: 0,
+     data: {
+      labels: [
+       '2016',
+       '2017',
+       '2018'
+      ],
+      datasets: [{
+       data: [100,100,100],
+       backgroundColor: [
+       '#FF6384',
+       '#36A2EB',
+       '#FFCE56'
+       ],
+       hoverBackgroundColor: [
+       '#FF6384',
+       '#36A2EB',
+       '#FFCE56'
+       ]
+      }]
+     }
    };
    this.responseFacebook = this.responseFacebook.bind(this);
    this.test = this.test.bind(this);
@@ -50,6 +76,8 @@ class App extends Component {
   .then( (response) => {
     this.setState({response: response.data.posts.data});
     console.log(this.state.response);
+    this.looptest();
+
   })
   .catch( (error) => {
     console.log(error);
@@ -60,40 +88,83 @@ responseFacebook(response) {
   console.log(response);
  this.setState({token: response.accessToken ,
                 facebookel: 'none'});
+                this.test();
+             
 }
 
 
-  looptest() {
 
+
+  looptest() {
+    
     graph.setAccessToken(this.state.token);
     graph.setVersion("3.0");
     console.log(this.state.token);
 
-    return ( 
+    var newArray = [];  
+    var localyearone = 0;
+    var localyeartwo = 0;
+    var localyearthree = 0;
+
+    const datasetsCopy = this.state.data.datasets.slice(0);
+    const dataCopy = datasetsCopy[0].data.slice(0);
+  
+
      this.state.response.map((data,index) => {
-     // return(<li><h1>{data.message}</h1></li>);
-      graph.get(data.id+'/likes', function(err, res) {
-       console.log(res);
+      graph.get(data.id, function(err, res) {
+       console.log(res.created_time.split('-',5)[0]);
+        if(res.created_time.split('-',5)[0] == '2016')  {
+            localyearone = localyearone+1; 
+            console.log(localyearone);
+        }
+
+          if (res.created_time.split('-',5)[0] == '2017')  {
+               localyeartwo = localyeartwo+1; 
+          }
+         
+           if (res.created_time.split('-',5)[0] == '2018')  {
+               localyearthree = localyearthree+1;  
+           }     
+
+           dataCopy[0] = localyearone;
+        console.log('year1',localyearone);
+   
+        dataCopy[1] = localyeartwo;
+        console.log('year2',localyeartwo);
+   
+       
+        dataCopy[2] = localyearthree;
+        console.log('year3',localyearthree);
+   
+   
+        datasetsCopy[0].data = dataCopy;
+
+        
 
       }
     );
+   
 
-       })
-       )
+       });
 
-
-   }
+      
+       this.setState({
+        data: Object.assign({}, this.state.data, {
+            datasets: datasetsCopy
+        })
+    });
+   
+  
+  }
 
   
   render() {
 
-
       const stylefbdiv = {
         display: this.state.facebookel
       }
-
+    
     return (
-
 
         <MuiThemeProvider>
                 <div style= {divStyle}>
@@ -126,9 +197,8 @@ responseFacebook(response) {
                TEST
              </button>
 
-              
             
-     <ul>{this.looptest()}</ul>
+            <div><Doughnut data={this.state.data}/></div>
      </div>
      </MuiThemeProvider>
 
