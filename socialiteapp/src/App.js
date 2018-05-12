@@ -175,13 +175,13 @@ responseFacebook(response) {
           <Card>
 
                   <div style={divStyle}>
-
+                  <div style={stylefbdiv}>
                   <CardMedia>
             <img src={img} alt="img" />
             
             </CardMedia>
 
-                  <div style={stylefbdiv}>
+                  
                 <FacebookLogin
                   appId = "1645847055464084"
                   cookie = {true}
@@ -198,12 +198,7 @@ responseFacebook(response) {
 
 
 
-           <button
-               className="btn-margin"
-               onClick={this.test}
-             >
-               TEST
-             </button>
+           
 
        <AppBar
           title="SOCIALITE"
@@ -213,7 +208,13 @@ responseFacebook(response) {
             fontFamily:'montserrat',
           }}
            />
-         
+
+          <button
+               className="btn-margin"
+               onClick={this.test}
+             >
+               TEST
+             </button>
           
 
 
