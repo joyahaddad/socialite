@@ -10,11 +10,14 @@ import './App.css';
 import graph from 'fb-react-sdk';
 import {Doughnut} from 'react-chartjs-2';
 import {Pie} from 'react-chartjs-2';
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import CardHeader from 'material-ui/Card/CardHeader';
 
 var divStyle = {
-  height: 1356,
-  backgroundImage: `url(${"socialite.png"})`
-}
+    backgroundColor: '#3b5998',
+    textAlign: 'center',
+    fontFamily: 'sifonn'
+  }
 
 
 class App extends Component {
@@ -166,28 +169,33 @@ responseFacebook(response) {
     
     return (
 
-        <MuiThemeProvider>
-                <div style= {divStyle}>
 
-       <AppBar
-          title="S o c i a l i t e"
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
-          style={{
-            backgroundColor: 'rgba(0,0,0,.9)',
-            fontFamily:'montserrat',
-          }}
-           />
-         
-        <div style={stylefbdiv}>
-        <FacebookLogin
-            appId = "1645847055464084"
-            cookie = {true}
-            autoLoad={false}
-            fields="name,email,picture"
-            scope="user_posts,user_likes"
-            callback={this.responseFacebook}
-             />
-            </div>
+        <MuiThemeProvider>
+                <div>
+          <Card>
+
+                  <div style={divStyle}>
+
+                  <CardMedia>
+            <img src={img} alt="img" />
+            
+            </CardMedia>
+
+                  <div style={stylefbdiv}>
+                <FacebookLogin
+                  appId = "1645847055464084"
+                  cookie = {true}
+                  autoLoad={false}
+                  fields="name,email,picture"
+                  scope="user_posts,user_likes"
+                  callback={this.responseFacebook}
+                   />
+                   </div>
+                   </div>  
+                    
+            
+            </Card>
+
 
 
            <button
@@ -197,8 +205,24 @@ responseFacebook(response) {
                TEST
              </button>
 
+       <AppBar
+          title="SOCIALITE"
+          iconClassNameRight="muidocs-icon-navigation-expand-more"
+          style={{
+            backgroundColor: '#3b5998',
+            fontFamily:'montserrat',
+          }}
+           />
+         
+          
+
+
+
             
             <div><Doughnut data={this.state.data}/></div>
+
+
+          
      </div>
      </MuiThemeProvider>
 
