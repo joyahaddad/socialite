@@ -43,6 +43,7 @@ var compStyle = {
       display: 'flex',
       flexWrap: 'nowrap',
       overflowX: 'auto',
+      maxHeight: 200
     },
     titleStyle: {
       color: 'white',
@@ -158,12 +159,12 @@ class App extends Component {
  }
 
  test(){
-  axios.get('https://graph.facebook.com/v3.0/me?fields=posts{object_id}&access_token='+ this.state.token +'')
+  axios.get('https://graph.facebook.com/v3.0/me?fields=posts&access_token='+ this.state.token +'')
 
   .then( (response) => {
     this.setState({response: response.data.posts.data});
-    console.log(this.state.response);
-   //this.looptest();
+    console.log('ici', response);
+   this.looptest();
    this.fetch_likes();
    //this.setState({images: pageurls});
 
@@ -201,7 +202,7 @@ looptest() {
 
 
    this.state.response.map((res,index) => {
-      console.log(res);
+      console.log('look here',res);
         console.log(res.data.created_time.split('-',5)[0]);
          if(res.data.created_time.split('-',5)[0] == '2016')  {
              localyearone = localyearone+1; 
@@ -298,6 +299,16 @@ fetch_likes(){
 }
 
 ///////
+/* 
+    fetch_user(){
+     graph.setAccessToken(this.state.token);
+     graph.setVersion("3.0");
+
+    
+
+    }
+ */
+
 
  
   render() {
