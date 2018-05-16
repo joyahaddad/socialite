@@ -11,7 +11,7 @@ import graph from 'fb-react-sdk';
 import {Doughnut} from 'react-chartjs-2';
 import {Bar} from 'react-chartjs-2';
 import {Pie} from 'react-chartjs-2';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Card, { CardActions, CardContent, CardMedia, CardTitle} from 'material-ui/Card';
 import CardHeader from 'material-ui/Card/CardHeader';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
@@ -23,9 +23,15 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 var divStyle = {
     backgroundColor: '#3b5998',
     textAlign: 'center',
-    fontFamily: 'sifonn'
+    fontFamily: 'montserrat'
   }
 
+
+var compStyle = {
+  textAlign: 'center',
+  fontFamily: 'montserrat',
+
+}
 
   const stylesLikes = {
     root: {
@@ -39,7 +45,8 @@ var divStyle = {
       overflowX: 'auto',
     },
     titleStyle: {
-      color: 'rgb(0, 188, 212)',
+      color: 'white',
+      backgroundColor: '#3b5998',
     },
   };
 
@@ -68,14 +75,14 @@ class App extends Component {
       datasets: [{
        data: [100,100,100],
        backgroundColor: [
-       '#FF6384',
-       '#36A2EB',
-       '#FFCE56'
+        '#FFC0CB',
+        '#FF69B4',
+        '#DB7093'
        ],
        hoverBackgroundColor: [
-       '#FF6384',
-       '#36A2EB',
-       '#FFCE56'
+        '#E0E0E0',
+        '#E0E0E0',
+        '#E0E0E0'  
        ]
       }]
      },
@@ -98,32 +105,32 @@ class App extends Component {
       datasets: [{
        data: [1,1,1,1,1,1,1,1,1,1,1,1],
        backgroundColor: [
-       '#FF6384',
-       '#36A2EB',
-       '#FFCE56',
-       '#36A2EB',
-       '#36A2EB',
-       '#36A2EB',
-       '#36A2EB',
-       '#36A2EB',
-       '#36A2EB',
-       '#36A2EB',
-       '#36A2EB',
-       '#36A2EB'
+       '#FFC0CB',
+       '#FFCCE5',
+       '#FF69B4',
+       '#DB7093',
+       '#FF1493',
+       '#CC0066',
+       '#4682B4',
+       '#1E90FF',
+       '#00BFFF',
+       '#87CEFA',
+       '#B0E0E6',
+       '#F0F8FF'
        ],
        hoverBackgroundColor: [
-       '#FF6384',
-       '#36A2EB',
-       '#FFCE56',
-       '#FFCE56',
-       '#FFCE56',
-       '#FFCE56',
-       '#FFCE56',
-       '#FFCE56',
-       '#FFCE56',
-       '#FFCE56',
-       '#FFCE56',
-       '#FFCE56'
+       '#E0E0E0',
+       '#E0E0E0',
+       '#E0E0E0',
+       '#E0E0E0',
+       '#E0E0E0',
+       '#E0E0E0',
+       '#E0E0E0',
+       '#E0E0E0',
+       '#E0E0E0',
+       '#E0E0E0',
+       '#E0E0E0',
+       '#E0E0E0'
        ]
       }]
      }
@@ -156,7 +163,7 @@ class App extends Component {
   .then( (response) => {
     this.setState({response: response.data.posts.data});
     console.log(this.state.response);
-   this.looptest();
+   //this.looptest();
    this.fetch_likes();
    //this.setState({images: pageurls});
 
@@ -328,8 +335,6 @@ fetch_likes(){
             
             </Card>
 
-
-
            
 
        <AppBar
@@ -343,22 +348,52 @@ fetch_likes(){
           }}
            />
 
-          <button
+
+      {/*     <button
                className="btn-margin"
                onClick={this.test}
              >
                TEST
-             </button>
+             </button> */}
           
 
+          <div>
+
+            <Card style={compStyle}>
+             <CardTitle
+             title="Welcome to Socialite" />
+            </Card>
+
+            </div>
+
+
+
+              <div>
+            <Card style={compStyle}>
+            <CardTitle
+            title="Your Posts Volume for 2016, 2017 and 2018" />   
+            <CardMedia>      
+               
+            <Doughnut data={this.state.yeardata} redraw={true}/ >
             
-            <div><Doughnut data={this.state.yeardata} redraw={true}/></div>
+           </CardMedia>
+            </Card>
+            </div>
           
-            <div><Doughnut data={this.state.monthdata} redraw={true}/></div>
+          <div>
+            <Card style={compStyle}> 
+              <CardTitle
+              title=" Your Posts Volume per Month for 2018"/>
+            <Doughnut data={this.state.monthdata} redraw={true}/>
+            </Card>
+            </div>
 
 
+<Card style={compStyle}>
+  <CardTitle
+    title= "Your Latest Liked Pages"/> 
 
-  <div style={stylesLikes.root}>
+    <div style={stylesLikes.root}>
     <GridList style={stylesLikes.gridList} cols={2.2}>
       {this.state.images.map((data,index) => (
         <GridTile
@@ -372,7 +407,7 @@ fetch_likes(){
       ))}
     </GridList>
   </div>
-
+</Card>
 
 
  
