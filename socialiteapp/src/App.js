@@ -193,6 +193,7 @@ looptest() {
   var localyeartwo = 0;
   var localyearthree = 0;
   var monthscount = [1,1,1,1,1,1,1,1,1,1,1,1];
+  var dummy;
 
   const datasetsCopy = this.state.yeardata.datasets.slice(0);
   const dataCopy = datasetsCopy[0].data.slice(0);
@@ -202,21 +203,24 @@ looptest() {
 
 
    this.state.response.map((res,index) => {
-      console.log('look here',res);
-        console.log(res.data.created_time.split('-',5)[0]);
-         if(res.data.created_time.split('-',5)[0] == '2016')  {
+      console.log('look here',res.created_time);
+
+      dummy = res.created_time;
+      console.log(dummy);
+        console.log(dummy.split('-',5)[0]);
+         if(dummy.split('-',5)[0] == '2016')  {
              localyearone = localyearone+1; 
          }
 
-           if (res.data.created_time.split('-',5)[0] == '2017')  {
+           if (dummy.split('-',5)[0] == '2017')  {
                 localyeartwo = localyeartwo+1; 
            }
           
-            if (res.data.created_time.split('-',5)[0] == '2018')  {
+            if (dummy.split('-',5)[0] == '2018')  {
                 localyearthree = localyearthree+1;  
-                 monthscount[res.data.created_time.split('-',5)[1]-1] = monthscount[res.data.created_time.split('-',5)[1]-1] + 1;
-                 console.log(res.data.created_time.split('-',5)[1]-1);
-                 console.log('monthscount ',monthscount[res.data.created_time.split('-',5)[1]]-1); 
+                 monthscount[dummy.split('-',5)[1]-1] = monthscount[dummy.split('-',5)[1]-1] + 1;
+                 console.log(dummy.split('-',5)[1]-1);
+                 console.log('monthscount ',monthscount[dummy.split('-',5)[1]]-1); 
             }     
 
             dataCopy[0] = localyearone;
