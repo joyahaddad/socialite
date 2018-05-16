@@ -333,9 +333,9 @@ fetch_likes(){
            
 
        <AppBar
-          title="SOCIALITE"
+          title=""
           iconClassNameRight="muidocs-icon-navigation-expand-more"
-          iconElementLeft={<img src={iconleft} style={{height: 34}}/>}
+          iconElementLeft={<img src={iconleft} style={{height: 54}}/>}
           iconElementRight={<FlatButton label="Log Out" />}
           style={{
             backgroundColor: '#3b5998',
