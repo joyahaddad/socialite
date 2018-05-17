@@ -15,9 +15,11 @@ import Card, { CardActions, CardContent, CardMedia, CardTitle} from 'material-ui
 import CardHeader from 'material-ui/Card/CardHeader';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
+import Avatar from 'material-ui/Avatar';
 import iconleft from './lefticon.png'
 import {GridList, GridTile} from 'material-ui/GridList';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import { relative } from 'path';
 
 
 var divStyle = {
@@ -61,10 +63,13 @@ class App extends Component {
      token: 'E',
      response: [],
      facebookel: '',
+     facebookview: 'none',
      chartdata: [],
      yearone: 0,
      yeartwo: 0,
      yearthree: 0,
+     name: '',
+     profilepic: '',
      images: [],
      imageTitles: [],
      yeardata: {
@@ -141,6 +146,7 @@ class App extends Component {
    this.fetch_likes = this.fetch_likes.bind(this);
    this.draw_images = this.draw_images.bind(this);
    this.looptest = this.looptest.bind(this);
+   this.fetch_profilepic = this.fetch_profilepic.bind(this);
   
       }
 
@@ -163,7 +169,7 @@ class App extends Component {
 
   .then( (response) => {
     this.setState({response: response.data.posts.data});
-    console.log('ici', response);
+    //console.log('ici', response);
    this.looptest();
    this.fetch_likes();
    //this.setState({images: pageurls});
@@ -177,16 +183,44 @@ class App extends Component {
 responseFacebook(response) {
   console.log(response);
  this.setState({token: response.accessToken ,
-                facebookel: 'none'});
+                facebookel: 'none', facebookview: '', name: response.name, profilepic: response.picture.data.url});
+              //  this.fetch_profilepic();
                 this.test();
              
 }
+
+/////
+
+
+fetch_profilepic() {
+  
+  axios.get('https://graph.facebook.com/v3.0/me/picture?type=large&access_token='+ this.state.token +'')
+
+  .then((res) => {
+  
+    console.log(res);
+    this.setState({profilepic: res.data});
+      return(<img src={res.data} style={{width: 80, height: 80}}/>);
+
+  })
+  .catch( (error) => {
+    console.log(error);
+  });  
+
+}
+
+
+
+
+//////
+
+
 
 looptest() {
     
   graph.setAccessToken(this.state.token);
   graph.setVersion("3.0");
-  console.log(this.state.token);
+  //console.log(this.state.token);
 
   var newArray = [];  
   var localyearone = 0;
@@ -203,11 +237,11 @@ looptest() {
 
 
    this.state.response.map((res,index) => {
-      console.log('look here',res.created_time);
+      //console.log('look here',res.created_time);
 
       dummy = res.created_time;
-      console.log(dummy);
-        console.log(dummy.split('-',5)[0]);
+      //console.log(dummy);
+        //console.log(dummy.split('-',5)[0]);
          if(dummy.split('-',5)[0] == '2016')  {
              localyearone = localyearone+1; 
          }
@@ -219,19 +253,19 @@ looptest() {
             if (dummy.split('-',5)[0] == '2018')  {
                 localyearthree = localyearthree+1;  
                  monthscount[dummy.split('-',5)[1]-1] = monthscount[dummy.split('-',5)[1]-1] + 1;
-                 console.log(dummy.split('-',5)[1]-1);
-                 console.log('monthscount ',monthscount[dummy.split('-',5)[1]]-1); 
+                 //console.log(dummy.split('-',5)[1]-1);
+                 //console.log('monthscount ',monthscount[dummy.split('-',5)[1]]-1); 
             }     
 
             dataCopy[0] = localyearone;
-         console.log('year1',localyearone);
+         //console.log('year1',localyearone);
     
          dataCopy[1] = localyeartwo;
-         console.log('year2',localyeartwo);
+        // console.log('year2',localyeartwo);
     
         
          dataCopy[2] = localyearthree;
-         console.log('year3',localyearthree);
+         //console.log('year3',localyearthree);
 
     
          datasetsCopy[0].data = dataCopy;
@@ -247,7 +281,7 @@ looptest() {
               datasets: datasetsCopy2
           })
           });
-        console.log(monthscount);
+        //console.log(monthscount);
 
          this.setState({
           yeardata: Object.assign({}, this.state.yeardata, {
@@ -285,10 +319,11 @@ fetch_likes(){
 
   .then( (res) => {
     
-    console.log(res);
+    //console.log(res);
     res.data.likes.data.map((data,index) => {
+  
       
-      console.log(data);
+      //console.log(data);
       pageurls.push('https://graph.facebook.com/v3.0/' + data.id+ '/picture?fields=url&access_token='+ this.state.token +'');
       titlelikes.push(data.name);
       this.setState({images: pageurls});
@@ -302,16 +337,6 @@ fetch_likes(){
 
 }
 
-///////
-/* 
-    fetch_user(){
-     graph.setAccessToken(this.state.token);
-     graph.setVersion("3.0");
-
-    
-
-    }
- */
 
 
  
@@ -319,6 +344,10 @@ fetch_likes(){
 
       const stylefbdiv = {
         display: this.state.facebookel
+      }
+
+      const style_hidden = {
+        display: this.state.facebookview
       }
     
     return (
@@ -339,7 +368,7 @@ fetch_likes(){
                 <FacebookLogin
                   appId = "1645847055464084"
                   cookie = {true}
-                  autoLoad={false}
+                 autoLoad={false}
                   fields="name,email,picture"
                   scope="user_posts,user_likes"
                   callback={this.responseFacebook}
@@ -351,6 +380,8 @@ fetch_likes(){
             </Card>
 
            
+
+           <div style={style_hidden}>
 
        <AppBar
           title=""
@@ -372,12 +403,15 @@ fetch_likes(){
              </button> */}
           
 
+      
           <div>
 
             <Card style={compStyle}>
              <CardTitle
-             title="Welcome to Socialite" />
-            </Card>
+             
+             title={this.state.name} />
+             <Avatar src={this.state.profilepic} style={{width: 80, height: 80}}/>   
+             </Card>
 
             </div>
 
@@ -425,7 +459,7 @@ fetch_likes(){
 </Card>
 
 
- 
+    </div>
           
      </div>
      </MuiThemeProvider>
