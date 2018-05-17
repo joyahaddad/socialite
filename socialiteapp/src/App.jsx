@@ -109,8 +109,9 @@ class App extends Component {
        'Dec'
       ],
       datasets: [{
-       data: [1,1,1,1,1,1,1,1,1,1,1,1],
-       backgroundColor: [
+     label: '2018',
+    data: [1,1,1,1,1,1,1,1,1,1,1,1],
+     backgroundColor: [
        '#FFC0CB',
        '#FFCCE5',
        '#FF69B4',
@@ -137,10 +138,11 @@ class App extends Component {
        '#E0E0E0',
        '#E0E0E0',
        '#E0E0E0'
-       ]
-      }]
-     }
-   };
+  ]
+}]
+},
+  };
+
    this.responseFacebook = this.responseFacebook.bind(this);
    this.test = this.test.bind(this);
    this.fetch_likes = this.fetch_likes.bind(this);
@@ -433,7 +435,16 @@ fetch_likes(){
             <Card style={compStyle}> 
               <CardTitle
               title=" Your Posts Volume per Month for 2018"/>
-            <Doughnut data={this.state.monthdata} redraw={true}/>
+            <Bar data={this.state.monthdata} redraw={true}
+             options={{
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }}/>
             </Card>
             </div>
 
