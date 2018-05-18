@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import FacebookLogin from 'react-facebook-login';
-import Image from 'material-ui-image';
+//import Image from 'material-ui-image';
 import axios from 'axios';
 import img from './socialite.png';
 import './App.css';
