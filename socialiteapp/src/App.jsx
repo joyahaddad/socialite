@@ -23,7 +23,8 @@ import { relative } from 'path';
 
 
 var divStyle = {
-    backgroundColor: '#3b5998',
+    //backgroundColor: '#3b5998',
+    backgroundColor: 'black',
     textAlign: 'center',
     fontFamily: 'montserrat'
   }
@@ -339,9 +340,6 @@ fetch_likes(){
 
 }
 
-
-
- 
   render() {
 
       const stylefbdiv = {
@@ -365,7 +363,7 @@ fetch_likes(){
             <img src={img} alt="img" />
             
             </CardMedia>
-
+              <p> Test for deploy </p>
                   
                 <FacebookLogin
                   appId = "1645847055464084"
@@ -422,7 +420,7 @@ fetch_likes(){
               <div>
             <Card style={compStyle}>
             <CardTitle
-            title="Your Posts Volume for 2016, 2017 and 2018" />   
+            title="Your Posts Volume for 2016, 2017 and 2018. Test deploy" />   
             <CardMedia>      
                
             <Doughnut data={this.state.yeardata} redraw={true}/ >
