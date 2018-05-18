@@ -23,8 +23,7 @@ import { relative } from 'path';
 
 
 var divStyle = {
-    //backgroundColor: '#3b5998',
-    backgroundColor: 'black',
+    backgroundColor: '#3b5998',
     textAlign: 'center',
     fontFamily: 'montserrat'
   }
@@ -110,7 +109,7 @@ class App extends Component {
        'Dec'
       ],
       datasets: [{
-     label: '2018',
+     label: '',
     data: [1,1,1,1,1,1,1,1,1,1,1,1],
      backgroundColor: [
        '#FFC0CB',
@@ -363,7 +362,6 @@ fetch_likes(){
             <img src={img} alt="img" />
             
             </CardMedia>
-              <p> Test for deploy </p>
                   
                 <FacebookLogin
                   appId = "1645847055464084"
