@@ -21,10 +21,6 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import { relative } from 'path';
 
-var generalStyle = {
-  backgroundColor: 'black',
-}
-
 var divStyle = {
     backgroundColor: '#3b5998',
     textAlign: 'center',
@@ -360,7 +356,7 @@ fetch_likes(){
     return (
 
         <MuiThemeProvider>
-                <div style={generalStyle}>
+                <div>
           <Card>
 
                   <div style={divStyle}>
