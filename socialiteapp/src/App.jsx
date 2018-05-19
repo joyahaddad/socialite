@@ -361,9 +361,9 @@ fetch_likes(){
 
                   <div style={divStyle}>
                   <div style={stylefbdiv}>
-              {/* <CardMedia>
+               <CardMedia>
                 <img src={img} alt="img" />
-             </CardMedia> */}
+             </CardMedia>
                   
                 <FacebookLogin
                   appId = "1645847055464084"
