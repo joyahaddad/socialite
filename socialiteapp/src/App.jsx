@@ -423,7 +423,7 @@ fetch_likes(){
               <div>
             <Card style={compStyle}>
             <CardTitle
-            title="Your Posts Volume for 2016, 2017 and 2018. Test deploy" />   
+            title="Your Posts Volume for 2016, 2017 and 2018. " />   
             <CardMedia>      
                
             <Doughnut data={this.state.yeardata} redraw={true}/ >
