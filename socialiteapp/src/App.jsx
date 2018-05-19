@@ -149,22 +149,10 @@ class App extends Component {
    this.draw_images = this.draw_images.bind(this);
    this.looptest = this.looptest.bind(this);
    this.fetch_profilepic = this.fetch_profilepic.bind(this);
+   this.logout = this.logout.bind(this);
   
       }
-
-
- goTo(route) {
-   this.props.history.replace(`/${route}`)
- }
-  
-
- login() {
-   this.props.auth.login();
- }
  
- logout() {
-   this.props.auth.logout();
- }
 
  test(){
   axios.get('https://graph.facebook.com/v3.0/me?fields=posts&access_token='+ this.state.token +'')
@@ -238,7 +226,7 @@ looptest() {
   const dataCopy2 = datasetsCopy2[0].data.slice(0);
 
 
-   this.state.response.map((res,index) => {
+     this.state.response.map((res,index) => {
       //console.log('look here',res.created_time);
 
       dummy = res.created_time;
@@ -295,6 +283,21 @@ looptest() {
 
 }
 
+
+logout() {
+  this.setState({token: 'E',
+  response: [],
+  facebookel: '',
+  facebookview: 'none',
+  chartdata: [],
+  yearone: 0,
+  yeartwo: 0,
+  yearthree: 0,
+  name: '',
+  profilepic: '',
+  images: [],
+  imageTitles: [] });
+}
 
 draw_images() {
 
@@ -385,7 +388,9 @@ fetch_likes(){
           title=""
           iconClassNameRight="muidocs-icon-navigation-expand-more"
           iconElementLeft={<img src={iconleft} style={{height: 54}}/>}
-          iconElementRight={<FlatButton label="Log Out" />}
+          iconElementRight={<FlatButton label="Log Out" 
+                                        onClick={this.logout}
+                                                        />}
           style={{
             backgroundColor: '#3b5998',
             fontFamily:'montserrat',
