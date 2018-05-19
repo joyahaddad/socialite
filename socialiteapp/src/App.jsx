@@ -21,6 +21,9 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import { relative } from 'path';
 
+var generalStyle = {
+  backgroundColor: 'black',
+}
 
 var divStyle = {
     backgroundColor: '#3b5998',
@@ -52,6 +55,8 @@ var compStyle = {
       backgroundColor: '#3b5998',
     },
   };
+
+
 
 
 
@@ -354,17 +359,15 @@ fetch_likes(){
     
     return (
 
-
         <MuiThemeProvider>
-                <div>
+                <div style={generalStyle}>
           <Card>
 
                   <div style={divStyle}>
                   <div style={stylefbdiv}>
-                  <CardMedia>
-            <img src={img} alt="img" />
-            
-            </CardMedia>
+              {/* <CardMedia>
+                <img src={img} alt="img" />
+             </CardMedia> */}
                   
                 <FacebookLogin
                   appId = "1645847055464084"
@@ -471,10 +474,10 @@ fetch_likes(){
 </Card>
 
 
-    </div>
-          
+    </div>    
      </div>
      </MuiThemeProvider>
+
 
   
     );
