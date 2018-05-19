@@ -109,7 +109,7 @@ class App extends Component {
        'Dec'
       ],
       datasets: [{
-     label: '',
+//     label: '',
     data: [1,1,1,1,1,1,1,1,1,1,1,1],
      backgroundColor: [
        '#FFC0CB',
