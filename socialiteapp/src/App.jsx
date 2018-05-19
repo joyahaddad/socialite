@@ -422,7 +422,7 @@ fetch_likes(){
               <div>
             <Card style={compStyle}>
             <CardTitle
-            title="Your Posts Volume for 2016, 2017 and 2018. " />   
+            title="Your Posts Frequency for 2016, 2017 and 2018. " />   
             <CardMedia>      
                
             <Doughnut data={this.state.yeardata} redraw={true}/ >
@@ -434,7 +434,7 @@ fetch_likes(){
           <div>
             <Card style={compStyle}> 
               <CardTitle
-              title=" Your Posts Volume per Month for 2018"/>
+              title=" Your Posts Frequency per Month for 2018"/>
             <Bar data={this.state.monthdata} redraw={true}
              options={{
               scales: {
