@@ -142,6 +142,9 @@ class App extends Component {
   ]
 }]
 },
+ options: {
+  legend: false
+}
   };
 
    this.responseFacebook = this.responseFacebook.bind(this);
