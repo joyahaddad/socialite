@@ -111,7 +111,7 @@ class App extends Component {
       ],
       options: { legend: { display: false }},
       datasets: [{
-//     label: '',
+      label: '2018',
     data: [1,1,1,1,1,1,1,1,1,1,1,1],
      backgroundColor: [
        '#FFC0CB',
