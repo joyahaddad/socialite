@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import FacebookLogin from 'react-facebook-login';
-//import Image from 'material-ui-image';
 import axios from 'axios';
 import img from './socialite.png';
 import './App.css';
-import graph from 'fb-react-sdk';
 import {Doughnut} from 'react-chartjs-2';
 import {Bar} from 'react-chartjs-2';
 import {Pie} from 'react-chartjs-2';
@@ -171,7 +169,6 @@ class App extends Component {
     //console.log('ici', response);
    this.display_graphs();
    this.fetch_likes();
-   //this.setState({images: pageurls});
 
   })
   .catch( (error) => {
@@ -180,15 +177,12 @@ class App extends Component {
 }
 
 responseFacebook(response) {
-  console.log(response);
+//console.log(response);
  this.setState({token: response.accessToken ,
                 facebookel: 'none', facebookview: '', name: response.name, profilepic: response.picture.data.url});
-              //  this.fetch_profilepic();
                 this.test();
              
 }
-
-/////
 
 
 fetch_profilepic() {
@@ -209,16 +203,8 @@ fetch_profilepic() {
 }
 
 
-
-
-//////
-
-
-
 display_graphs() {
-    
-  graph.setAccessToken(this.state.token);
-  graph.setVersion("3.0");
+
   //console.log(this.state.token);
 
   var newArray = [];  
@@ -319,8 +305,8 @@ draw_images() {
 
 fetch_likes(){
   
-  graph.setAccessToken(this.state.token);
-  graph.setVersion("3.0");
+//graph.setAccessToken(this.state.token);
+//graph.setVersion("3.0");
   var flag = false ;
   var paged_res;
   var next_req;
@@ -393,7 +379,6 @@ fetch_likes(){
 
        <AppBar
           title=""
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
           iconElementLeft={<img src={iconleft} style={{height: 54}}/>}
           iconElementRight={<FlatButton label="Log Out" 
                                         onClick={this.logout}
@@ -403,16 +388,6 @@ fetch_likes(){
             fontFamily:'montserrat',
           }}
            />
-
-
-      {/*     <button
-               className="btn-margin"
-               onClick={this.test}
-             >
-               TEST
-             </button> */}
-          
-
       
           <div>
 
