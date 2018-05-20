@@ -109,9 +109,8 @@ class App extends Component {
        'Nov',
        'Dec'
       ],
-      options: { legend: { display: false }},
       datasets: [{
-      label: '2018',
+      label: 'Jan',
     data: [1,1,1,1,1,1,1,1,1,1,1,1],
      backgroundColor: [
        '#FFC0CB',
