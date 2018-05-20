@@ -146,7 +146,6 @@ class App extends Component {
       }]
     },
     options: {
-      responsive: false,
       legend: {
         display: false,
       }, 
