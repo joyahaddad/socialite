@@ -94,57 +94,63 @@ class App extends Component {
       }]
      },
 
+
+
      monthdata: {
       labels: [
-       'Jan',
-       'Feb',
-       'Mar',
-       'Apr',
-       'May',
-       'Jun',
-       'Jul',
-       'Aug',
-       'Sep',
-       'Oct',
-       'Nov',
-       'Dec'
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sept',
+        'Oct',
+        'Nov',
+        'Dec'
       ],
       datasets: [{
-      label: 'Jan',
-    data: [1,1,1,1,1,1,1,1,1,1,1,1],
-     backgroundColor: [
-       '#FFC0CB',
-       '#FFCCE5',
-       '#FF69B4',
-       '#DB7093',
-       '#FF1493',
-       '#CC0066',
-       '#4682B4',
-       '#1E90FF',
-       '#00BFFF',
-       '#87CEFA',
-       '#B0E0E6',
-       '#F0F8FF'
+        label: '2018',
+        data: [1,1,1,1,1,1,1,1,1,1,1,1],
+        backgroundColor: [
+          '#FFC0CB',
+          '#FFCCE5',
+          '#FF69B4',
+          '#DB7093',
+          '#FF1493',
+          '#CC0066',
+          '#4682B4',
+          '#1E90FF',
+          '#00BFFF',
+          '#87CEFA',
+          '#B0E0E6',
+          '#F0F8FF'
+          ],
+          hoverBackgroundColor: [
+            '#E0E0E0',
+            '#E0E0E0',
+            '#E0E0E0',
+            '#E0E0E0',
+            '#E0E0E0',
+            '#E0E0E0',
+            '#E0E0E0',
+            '#E0E0E0',
+            '#E0E0E0',
+            '#E0E0E0',
+            '#E0E0E0',
+            '#E0E0E0'
        ],
-       hoverBackgroundColor: [
-       '#E0E0E0',
-       '#E0E0E0',
-       '#E0E0E0',
-       '#E0E0E0',
-       '#E0E0E0',
-       '#E0E0E0',
-       '#E0E0E0',
-       '#E0E0E0',
-       '#E0E0E0',
-       '#E0E0E0',
-       '#E0E0E0',
-       '#E0E0E0'
-  ]
-}]
-},
- options: {
-  legend: false
-}
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: false,
+      legend: {
+        display: false,
+      }, 
+    }
   };
 
    this.responseFacebook = this.responseFacebook.bind(this);
