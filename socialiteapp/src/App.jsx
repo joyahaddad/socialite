@@ -109,6 +109,7 @@ class App extends Component {
        'Nov',
        'Dec'
       ],
+      options: { legend: { display: false }},
       datasets: [{
 //     label: '',
     data: [1,1,1,1,1,1,1,1,1,1,1,1],
