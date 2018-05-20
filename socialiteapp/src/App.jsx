@@ -148,7 +148,7 @@ class App extends Component {
    this.test = this.test.bind(this);
    this.fetch_likes = this.fetch_likes.bind(this);
    this.draw_images = this.draw_images.bind(this);
-   this.looptest = this.looptest.bind(this);
+   this.display_graphs = this.display_graphs.bind(this);
    this.fetch_profilepic = this.fetch_profilepic.bind(this);
    this.logout = this.logout.bind(this);
   
@@ -161,7 +161,7 @@ class App extends Component {
   .then( (response) => {
     this.setState({response: response.data.posts.data});
     //console.log('ici', response);
-   this.looptest();
+   this.display_graphs();
    this.fetch_likes();
    //this.setState({images: pageurls});
 
@@ -207,7 +207,7 @@ fetch_profilepic() {
 
 
 
-looptest() {
+display_graphs() {
     
   graph.setAccessToken(this.state.token);
   graph.setVersion("3.0");
